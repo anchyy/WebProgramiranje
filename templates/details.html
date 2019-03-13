@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div id="fh5co-menus" data-section="menu">
+	<div class="container">
+		<div class="row text-center fh5co-heading row-padded">
+			<div class="col-md-8 col-md-offset-2">
+				<h2 class="heading to-animate">Details</h2>
+				<!-- <p class="sub-heading to-animate">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p> -->
+			</div>
+		</div>
+		<div class="row row-padded">
+			<div class="col-md-12">
+				<div class="fh5co-food-menu to-animate-2">
+					<div class="col-sm-4">
+						<div class="fh5co-food-desc"> <br /><br /><br />
+							{% for item in jsonRecipes["images"] %}
+							<img src="{{item['hostedLargeUrl']}}" class="img-responsive imgSearch" alt="Slika1">
+							{% endfor %}
+							<br />
+							<h3 class="heading to-animate">Cook time: {{jsonRecipes["cookTime"]}}</h3>
+							<span>Total time: {{jsonRecipes["totalTime"]}} </span><br />
+							<span>Number of serving: {{jsonRecipes["numberOfServings"]}} </span><br />
+
+							<span>Rating:{{jsonRecipes["rating"]}} </span><br /> <br />
+							<a href="{{jsonRecipes['source']['sourceRecipeUrl']}}" target="_blank"
+								style="font-size: 16px;">More details..</a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="fh5co-food-desc">
+							<h2 class="heading to-animate">Ingrediens</h2>
+							{% for item in jsonRecipes["ingredientLines"] %}
+
+								<p>{{item}}</p>
+
+							{% endfor %} 
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="fh5co-food-menu to-animate-2">
+					<table class="table">
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						{% for item in jsonRecipes["nutritionEstimates"] %}
+						<tr>
+							<td> {{ item["attribute" ]}}</td>
+							<td> {{item["description"]}} </td>
+							<td>{{item["value"]}} </td>
+						</tr>
+						{% endfor %}
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

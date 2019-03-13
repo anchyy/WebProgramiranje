@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div id="fh5co-menus" data-section="menu">
+	<div class="container">
+		<div class="row text-center fh5co-heading row-padded">
+			<div class="col-md-8 col-md-offset-2">
+				<h2 class="heading to-animate">Results</h2>
+				<!-- <p class="sub-heading to-animate">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p> -->
+			</div>
+		</div>
+		<div class="row row-padded">
+			<div class="col-md-12">
+				<div class="fh5co-food-menu to-animate-2">
+					{% if jsonRecipes["matches"]== [] %}
+					<div class="col-sm-4">
+						<div class="fh5co-food-desc">
+							<h3> No search results</h3>
+						</div>
+					</div>
+					{% else %}
+
+					{% for item in jsonRecipes["matches"] %}
+					<div class="col-sm-4">
+						<div class="fh5co-food-desc">
+							<figure>
+								{% if item['imageUrlsBySize']=="" %}
+								<img src="images/r0401-vegan.png" class="img-responsive imgSearch" alt="Slika1">
+								{% else %}
+								<img src="{{item['smallImageUrls'][0]}}" class="img-responsive imgSearch" alt="Slika1">
+								{% endif %}
+							</figure>
+							<div>
+								<h3><a href="/details/{{item['id']}}">{{item["recipeName"]}}</a> </h3>
+								<p> {{item["sourceDisplayName"]}}</p>
+							</div>
+						</div> 
+					</div>
+
+					{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
